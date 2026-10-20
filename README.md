@@ -151,7 +151,26 @@ print(f"Time range: {df['time'].min()} to {df['time'].max()}")
 # columns: time, ask, bid, ask_volume, bid_volume
 ```
 
-### 3) Configuration
+### 3) Compare Against FXMacroData Daily Reference Rates
+
+```python
+from tick_vault import fetch_fxmacrodata_daily
+
+daily_ref = await fetch_fxmacrodata_daily(
+    symbol="EURUSD",
+    start="2024-01-01",
+    end="2024-02-01",
+    api_key="YOUR_FXMACRODATA_KEY",  # forex data requires a key
+)
+
+print(daily_ref.head())
+# columns: date, value
+```
+
+Use this alongside tick-derived daily bars when you want an external reference
+series for spot-rate validation, macro research, or reporting.
+
+### 4) Configuration
 
 ```python
 from tick_vault import reload_config
